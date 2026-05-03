@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forgive Me? 🥺</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Comic Sans MS", cursive;
+    background: linear-gradient(to bottom right, #ffe6f0, #e6f7ff);
+    text-align: center;
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 50px;
+    color: #ff4d88;
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+
+#yes {
+    background-color: #ff66a3;
+    color: white;
+}
+
+#no {
+    background-color: #ccc;
+}
+
+/* Sticker */
+#sticker {
+    font-size: 80px;
+    margin-top: 30px;
+    transition: transform 0.3s;
+}
+
+/* Floating emojis */
+.emoji {
+    position: absolute;
+    font-size: 24px;
+    animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-300px); opacity: 0; }
+}
+
+/* Sparkles */
+.sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: pink;
+    border-radius: 50%;
+    animation: sparkle 2s linear forwards;
+}
+
+@keyframes sparkle {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.5) translateY(-150px); }
+}
+
+/* LOVE MESSAGE POPUP */
+#loveMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 50px;
+    color: #ff3385;
+    background: white;
+    padding: 20px 40px;
+    border-radius: 25px;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+    transition: transform 0.5s ease;
+    z-index: 1000;
+}
+
+#loveMessage.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+</style>
+</head>
+
+<body>
+
+<h1>Will you forgive me? 🥺</h1>
+
+<div id="sticker">🥺</div>
+
+<div class="buttons">
+    <button id="yes">Yes 💕</button>
+    <button id="no">No 😢</button>
+</div>
+
+<div id="loveMessage">I LOVE YOUU SOO SOO MUCHHHH MY RENEEE MY BBYY MUAHHHH MUAHHHHH 💖</div>
+
+<script>
+let yesBtn = document.getElementById("yes");
+let noBtn = document.getElementById("no");
+let sticker = document.getElementById("sticker");
+let loveMsg = document.getElementById("loveMessage");
+
+let scale = 1;
+
+// YES CLICK
+yesBtn.addEventListener("click", () => {
+    sticker.innerText = "😄💖";
+
+    explodeEmojis();
+    createSparkles();
+
+    loveMsg.classList.add("show");
+});
+
+// NO CLICK
+noBtn.addEventListener("click", () => {
+    sticker.innerText = "😭";
+
+    scale += 0.2;
+    yesBtn.style.transform = `scale(${scale})`;
+});
+
+// EMOJI EXPLOSION
+function explodeEmojis() {
+    const emojis = ["💖","💕","💘","💝","🥺","😍"];
+
+    for (let i = 0; i < 40; i++) {
+        let e = document.createElement("div");
+        e.className = "emoji";
+        e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+        e.style.left = Math.random() * window.innerWidth + "px";
+        e.style.top = Math.random() * window.innerHeight + "px";
+
+        document.body.appendChild(e);
+
+        setTimeout(() => e.remove(), 3000);
+    }
+}
+
+// SPARKLES
+function createSparkles() {
+    for (let i = 0; i < 40; i++) {
+        let s = document.createElement("div");
+        s.className = "sparkle";
+
+        s.style.left = Math.random() * window.innerWidth + "px";
+        s.style.top = Math.random() * window.innerHeight + "px";
+
+        document.body.appendChild(s);
+
+        setTimeout(() => s.remove(), 2000);
+    }
+}
+</script>
+
+</body>
+</html>
